@@ -3,13 +3,27 @@ import classes from "./UserCard.module.scss";
 import { userIcon } from "../../assets/images/images";
 import { useNavigate } from "react-router";
 const UserCard = (props) => {
+  /**
+   * UserCard component displays a card with user information.
+   */
+  // Destructure user data from props.
   const { name, email, address, company, website, id } = props?.data;
+
+  // Hook to navigate to different routes.
   const navigate = useNavigate();
+
+  /**
+   * Handles the click event on the card.
+   * Navigates to the user detail page with the user's ID.
+   *
+   * @param {number} id - The ID of the user.
+   */
   const handleClick = (id) => {
     navigate(`/user-detail/${id}`);
   };
 
   return (
+    // Main container for the user card.
     <div
       className={`${classes.card}  p-4 shadow`}
       onClick={() => handleClick(id)}
