@@ -1,6 +1,9 @@
 @import "../../assets//styles/variable";
 .footer {
   background-color: $primery_bg;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   p {
     color: #fff;
   }

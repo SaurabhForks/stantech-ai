@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDom from "react-dom/client";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router";
 import "./app.scss";
@@ -10,11 +10,12 @@ import "@fontsource/roboto/700.css";
 import Home from "./components/home/Home";
 import Header from "./components/header/Header";
 import NotFound from "./components/notFound/NotFound";
-import Contact from "./components/contact/Contact";
-import About from "./components/about/About";
 import Footer from "./components/footer/Footer";
 import store from "./redux/store";
 import { Provider } from "react-redux";
+const UserDetail = lazy(() => import("./components/userDetail/UserDetail"));
+const About = lazy(() => import("./components/about/About"));
+const Contact = lazy(() => import("./components/contact/Contact"));
 const AppLayout = () => {
   return (
     <>
@@ -33,8 +34,30 @@ root.render(
         <Routes>
           <Route element={<AppLayout />}>
             <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="contact" element={<Contact />} />
+            <Route
+              path="contact"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Contact />
+                </Suspense>
+              }
+            />
+            <Route
+              path="about"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <About />
+                </Suspense>
+              }
+            />
+            <Route
+              path="user-detail/:id"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <UserDetail />
+                </Suspense>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

@@ -1,6 +1,9 @@
 @import "../../assets//styles/variable";
 .header {
   background-color: $primery_bg;
+  position: sticky;
+  top: 0;
+  left: 0;
   .nav {
     li {
       a {
